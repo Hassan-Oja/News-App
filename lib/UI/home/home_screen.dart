@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/UI/home/category_details/category_details.dart';
 import 'package:news/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
           ),
         centerTitle: true,
       ),
+      body: CategoryDetails(),
 
     );
   }

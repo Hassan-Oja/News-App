@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LanguageProvider extends ChangeNotifier {
   // todo : data
-  String currentLanguage = 'en';
+  String currentLanguage = 'ar';
 
   // change Languge
   void changeLanguage(String newLanguage) {
