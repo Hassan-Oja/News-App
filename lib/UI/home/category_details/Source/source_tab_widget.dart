@@ -4,11 +4,11 @@ import 'package:news/UI/home/category_details/Source/source_name.dart';
 import 'package:news/utils/app_colors.dart';
 
 import '../../../../Model/source_response.dart';
+import '../News/news_widget.dart';
 
 class SourceTabWidget extends StatefulWidget {
   List <Source> sources;
-
-  SourceTabWidget({super.key, required this.sources});
+  SourceTabWidget({super.key, required this.sources });
 
   @override
   State<SourceTabWidget> createState() => _SourceTabWidgetState();
@@ -19,6 +19,7 @@ class _SourceTabWidgetState extends State<SourceTabWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return DefaultTabController(
         length: widget.sources.length,
         child: Column(
@@ -40,7 +41,8 @@ class _SourceTabWidgetState extends State<SourceTabWidget> {
 
                 });
               },
-            )
+            ),
+            Expanded(child: NewsWidget(source: widget.sources[selectedIndex]))
           ],
         )
     );
