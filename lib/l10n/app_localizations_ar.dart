@@ -49,4 +49,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search => 'بحث';
+
+  @override
+  String get view_full_article => 'عرض المقال كاملًا';
 }

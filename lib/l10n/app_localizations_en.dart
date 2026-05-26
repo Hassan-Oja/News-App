@@ -49,4 +49,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search => 'Search';
+
+  @override
+  String get view_full_article => 'View Full Article';
 }

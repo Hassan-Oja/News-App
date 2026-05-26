@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news/UI/home/category_details/News/news_detail_bottom_sheet.dart';
 
 import '../../../../Model/news_response.dart';
 import '../../../../utils/app_colors.dart';
@@ -12,56 +13,68 @@ class NewsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return Container(
-      margin: EdgeInsets.symmetric(
-          horizontal: width*0.04,
-          vertical: height*0.02
-      ),
-      padding: EdgeInsets.symmetric(
-          horizontal: width*0.02,
-          vertical: height*0.02
-      ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: Theme.of(context).indicatorColor,
-              width: 2
-          )
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child:
-            //Image.network(news.urlToImage??"")
-            CachedNetworkImage(
-              imageUrl: news.urlToImage ?? '',
-              placeholder: (context, url) => Center(child: CircularProgressIndicator( color: AppColors.grey,)),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-          ),
-          SizedBox(height: height*0.02,),
-          Text(
-            news.title ?? '',
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          SizedBox(height: height*0.02,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  'By ${news.author ?? ''}',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
+    return GestureDetector(
+      onTap: (){
+        // todo : Open Bottom Sheet To Show Details
+        showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            backgroundColor: Theme.of(context).indicatorColor,
+            builder: (context) {
+              return NewsDetailBottomSheet(news: news,);
+            },
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: width*0.04,
+            vertical: height*0.02
+        ),
+        padding: EdgeInsets.symmetric(
+            horizontal: width*0.02,
+            vertical: height*0.02
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: Theme.of(context).indicatorColor,
+                width: 2
+            )
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child:
+              CachedNetworkImage(
+                imageUrl: news.urlToImage ?? '',
+                placeholder: (context, url) => Center(child: CircularProgressIndicator( color: AppColors.grey,)),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              Text(
-                news.publishedAt ?? '',
-                style: Theme.of(context).textTheme.labelSmall,
-              )
-            ],
-          )
-        ],
+            ),
+            SizedBox(height: height*0.02,),
+            Text(
+              news.title ?? '',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            SizedBox(height: height*0.02,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    'By ${news.author ?? ''}',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+                Text(
+                  news.publishedAt ?? '',
+                  style: Theme.of(context).textTheme.labelSmall,
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
