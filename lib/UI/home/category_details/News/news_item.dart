@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Model/news_response.dart';
+import '../../../../utils/app_colors.dart';
 
 class NewsItem extends StatelessWidget {
   News news;
@@ -30,12 +32,13 @@ class NewsItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(news.urlToImage??"")
-            // CachedNetworkImage(
-            //   imageUrl: news.urlToImage ?? '',
-            //   placeholder: (context, url) => Center(child: CircularProgressIndicator( color: AppColors.grey,)),
-            //   errorWidget: (context, url, error) => Icon(Icons.error),
-            // ),
+            child:
+            //Image.network(news.urlToImage??"")
+            CachedNetworkImage(
+              imageUrl: news.urlToImage ?? '',
+              placeholder: (context, url) => Center(child: CircularProgressIndicator( color: AppColors.grey,)),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
           SizedBox(height: height*0.02,),
           Text(
